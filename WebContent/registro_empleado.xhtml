@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template/BasicTemplate.xhtml">
+
+	<ui:define name="content">
+			<h:form>
+				<h:messages globalOnly="true" showDetail="false"></h:messages>
+				
+				<h:panelGrid columns="3">
+					<h:outputText value="Nombre"></h:outputText>
+					<h:inputText id="nombre" value="#{empleadoManagedBean.empleado.nombre}" 
+					required="true" requiredMessage="Nombre es obligatorio">
+					</h:inputText>
+					<h:message for="nombre" style="color:red"></h:message>
+					
+					<h:outputText value="DNI"></h:outputText>
+					<h:inputText id="dni" value="#{empleadoManagedBean.empleado.dni}" validatorMessage="DNI invalido">
+						<f:validateLength minimum="8" maximum="8"></f:validateLength>
+					</h:inputText>
+					<h:message for="dni"></h:message>
+				
+					<h:outputText value="Fecha de Nacimiento"></h:outputText>
+					<h:inputText id="fechaNacimiento" value="#{empleadoManagedBean.empleado.fechaNacimiento}" converterMessage="error en fecha">
+						<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+					</h:inputText>
+					<h:message for="fechaNacimiento"></h:message>
+					
+					<h:outputText value="Sueldo"></h:outputText>
+					<h:inputText id="sueldo" value="#{empleadoManagedBean.empleado.sueldo}">
+						<f:validateDoubleRange minimum="950.00" maximum="10000.00"></f:validateDoubleRange>
+					</h:inputText>
+					<h:message for="sueldo"></h:message>
+					
+					<h:outputText value="Estado"></h:outputText>
+					<h:selectOneMenu id="estado" 
+							value="#{empleadoManagedBean.empleado.estado}">
+				
+						<f:selectItem itemLabel="ACTIVO" itemValue="A"></f:selectItem>
+						<f:selectItem itemLabel="INACTIVO" itemValue="I"></f:selectItem>
+					</h:selectOneMenu>
+					<h:message for="estado"></h:message>
+				
+				</h:panelGrid>		
+				<h:commandButton value="Guardar" 
+						 action="#{empleadoManagedBean.guardar}"></h:commandButton>
+			</h:form>
+			
+			
+	</ui:define>
+	
+</ui:composition>
+</html>
